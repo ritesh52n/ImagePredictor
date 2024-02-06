@@ -1,0 +1,24 @@
+﻿@model PredictionModel
+
+<h2>Predicted Result</h2>
+@if (Model.File != null)
+{
+    {
+       
+            var imageBytes = new byte[Model.File.Length];
+            using (var stream = Model.File.OpenReadStream())
+            {
+                stream.Read(imageBytes, 0, (int)Model.File.Length);
+            }
+
+            var base64 = Convert.ToBase64String(imageBytes);
+
+            <img src="data:image/jpeg;base64,@base64" alt="Uploaded Image" style="width: 40% ; height: 40%;" /> <p>@Model.PredictedLabel </p>
+        
+       
+    }
+}
+else
+{
+    <p>No prediction result available.</p>
+}
